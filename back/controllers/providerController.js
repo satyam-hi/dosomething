@@ -413,3 +413,49 @@ export const getProviderById = async (req, res) => {
         });
     }
 };
+
+
+
+
+//==============verify token ======================
+
+export const verifyProviderToken = async (req, res) => {
+    const { token, id, role } = req.body;
+
+    // Check for required fields
+    if (!token || !id || !role) {
+        return res.status(400).json({
+            success: false,
+            valid: false,
+            message: "Token, id and role are required",
+        });
+    }
+
+    try {
+        const sprovid = id;
+        const accesstoken = token;
+
+        // Check if a user exists with this ID + token
+        const user = await Sprovider.findOne({ sprovid, accesstoken });
+
+        if (!user) {
+            return res.json({
+                success: false,
+                valid: false,
+                message: "Invalid token or user not found",
+            });
+        }
+
+        return res.json({
+            success: true,
+            valid: true, // token matched
+        });
+
+    } catch (err) {
+        return res.json({
+            success: false,
+            valid: false,
+            message: "Error verifying token",
+        });
+    }
+};

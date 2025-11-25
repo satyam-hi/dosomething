@@ -23,6 +23,14 @@ export default function Header() {
                     <Link href="/login" >Login</Link>
                     <Link href="/register" >Register</Link>
                     <Link href="/email-verify" >Email-verify</Link>
+                    <Link href="/login-provider" >Login-provider</Link>
+                    <Link href="/register-provider" >Register-provider</Link>
+                    <Link href="/email-verify-provider" >Email-verify-provider</Link>
+                    <Link href="/user-forgot-password" > User-forgot-password</Link>
+                    <Link href="/provider-forgot-password" > Provider-forgot-password</Link>
+                    
+                   
+                    
                 </nav>
 
                 {/* MOBILE MENU BUTTON */}

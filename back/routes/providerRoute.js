@@ -21,6 +21,7 @@ import {
     loginProvider,
     logoutProvider,
     getProviderById,
+    verifyProviderToken,
 } from "../controllers/providerController.js";
 
 import { providerAuthMiddleware } from "../middleware/providerAuth.js";
@@ -32,6 +33,9 @@ providerRouter.post("/register", registerProvider);
 providerRouter.post("/verify-email", verifyProviderEmail);
 providerRouter.post("/forgot-password", providerForgotPassword);
 providerRouter.post("/login", loginProvider);
-providerRouter.post("/logout", providerAuthMiddleware, logoutProvider);
+// providerRouter.post("/logout", providerAuthMiddleware, logoutProvider);
+providerRouter.post("/logout", logoutProvider);
 providerRouter.get("/provider/:sprovid", getProviderById);
+providerRouter.post("/verify-token", verifyProviderToken);
+
 export default providerRouter;

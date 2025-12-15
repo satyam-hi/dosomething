@@ -2,6 +2,8 @@
 import { cookies } from "next/headers";
 import UserLogoutButton from "@/app/component/admin/userLogouteBtn/logoutbtn"
 import ProviderLogoutButton from "@/app/component/admin/providerLogouteBtn/logoutbtn"
+import UserAdminHeader from "@/app/component/admin/userheader"
+import ProviderAdminHeader from "@/app/component/admin/providerheader"
 
 export default async function AdminHome() {
   const cookieStore = await cookies();               // ✔ correct
@@ -10,7 +12,12 @@ export default async function AdminHome() {
 
   return (
     <>
-   {role== "2" ? <ProviderLogoutButton /> : <UserLogoutButton/>}
+   
+   {/* {role== "2" ? <ProviderAdminHeader /> : <UserAdminHeader/>}
+   <div>
+    <span style={{float:"right",margin:"10px"}}> {role== "2" ? <ProviderLogoutButton /> : <UserLogoutButton/>}</span>
+   </div> */}
+   
     
       AdminHome page — ID: {id}, Role: {role}
       {role === "1" ?<p>You are User  </p>:<p>You are Provider  </p>}

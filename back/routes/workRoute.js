@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getAllWorks, getSingleWork, registerWork, updateWork, deleteWork, getWorksByUser} from "../controllers/workController.js"
+import { getAllWorks, getSingleWork, registerWork, updateWork, deleteWork, getWorksByUser,getWorksByProvider} from "../controllers/workController.js"
 import {userAuthMiddleware} from "../middleware/userAuth.js"
 import { providerAuthMiddleware } from "../middleware/providerAuth.js";
 
@@ -30,6 +30,7 @@ workRouter.delete('/:id', deleteWork);
 
 // 
 workRouter.get('/user/:id', getWorksByUser);
+workRouter.get('/provider/:id', getWorksByProvider);
 
 
 

@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 
-export default function Header() {
+export default function ProviderAdminHeader() {
   const [open, setOpen] = useState(false);     // mobile menu
   const [loginOpen, setLoginOpen] = useState(false);
   const [registerOpen, setRegisterOpen] = useState(false);
@@ -31,73 +31,25 @@ export default function Header() {
 
         {/* LOGO */}
         <Link href="/" className="text-xl font-bold">
-          MySite
+          MySite pro
         </Link>
 
         {/* DESKTOP MENU */}
         <nav className="hidden md:flex gap-6 text-lg items-center">
 
-          <Link href="/">Home</Link>
-          <Link href="/about">About</Link>
-
-          {/* LOGIN DROPDOWN */}
-          <div ref={loginRef} className="relative">
-            <span
-              className="cursor-pointer"
-              onClick={() => {
-                setLoginOpen(!loginOpen);
-                setRegisterOpen(false);
-              }}
-            >
-              Login
-            </span>
-
-            {loginOpen && (
-              <div className="absolute bg-white shadow-lg rounded mt-2 py-2 w-40 z-20">
-                <Link href="/login" className="block px-4 py-2 hover:bg-gray-100">
-                   Login User
-                </Link>
-                <Link
-                  href="/login-provider"
-                  className="block px-4 py-2 hover:bg-gray-100"
-                >
-                  Login Provider
-                </Link>
-              </div>
-            )}
-          </div>
-
-          {/* REGISTER DROPDOWN */}
-          <div ref={registerRef} className="relative">
-            <span
-              className="cursor-pointer"
-              onClick={() => {
-                setRegisterOpen(!registerOpen);
-                setLoginOpen(false);
-              }}
-            >
-              Register
-            </span>
-
-            {registerOpen && (
-              <div className="absolute bg-white shadow-lg rounded mt-2 py-2 w-48 z-20">
-                <Link href="/register" className="block px-4 py-2 hover:bg-gray-100">
-                  Register User
-                </Link>
-                <Link
-                  href="/register-provider"
-                  className="block px-4 py-2 hover:bg-gray-100"
-                >
-                  Register Provider
-                </Link>
-              </div>
-            )}
-          </div>
+          {/* <Link href="/">Home</Link>
+          <Link href="/about">About</Link> */}
+        
 
           {/* Admin pages */}
-          {/* <Link href="/admin/all-work-list">All Work List</Link>
-          <Link href="/admin/add-work">Add Work</Link>
+          {/* <Link href="/admin/add-work">Add Work</Link>
           <Link href="/admin/my-work-list">My Work List</Link> */}
+          <Link href="/admin/all-work-list">All Work List</Link>
+          <Link href="/admin/open-work-list">open-work-list</Link>
+          <Link href="/admin/work-filter">work-filter</Link>
+          <Link href="/admin/accept-work-provider">accept-work-provider</Link>
+          <Link href="/admin/my-work-provider">my-work-provider</Link>
+          
         </nav>
 
         {/* MOBILE MENU BUTTON */}
@@ -117,29 +69,7 @@ export default function Header() {
           <Link href="/" onClick={() => setOpen(false)}>Home</Link>
           <Link href="/about" onClick={() => setOpen(false)}>About</Link>
 
-          {/* MOBILE LOGIN DROPDOWN */}
-          <details>
-            <summary className="cursor-pointer">Login</summary>
-            <div className="flex flex-col ml-4">
-              <Link href="/login" onClick={() => setOpen(false)}>Login User</Link>
-              <Link href="/login-provider" onClick={() => setOpen(false)}>
-                Login Provider
-              </Link>
-            </div>
-          </details>
-
-          {/* MOBILE REGISTER DROPDOWN */}
-          <details>
-            <summary className="cursor-pointer">Register</summary>
-            <div className="flex flex-col ml-4">
-              <Link href="/register" onClick={() => setOpen(false)}>
-                Register User
-              </Link>
-              <Link href="/register-provider" onClick={() => setOpen(false)}>
-                Register Provider
-              </Link>
-            </div>
-          </details>
+       
 
           {/* Admin */}
           <Link href="/admin/all-work-list" onClick={() => setOpen(false)}>

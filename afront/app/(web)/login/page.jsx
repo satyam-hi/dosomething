@@ -3,6 +3,9 @@
 
 
 "use client";
+import Link from "next/link";
+
+
 
 import { useState } from "react";
 
@@ -40,9 +43,10 @@ export default  function LoginPage() {
       setLoading(false);
 
       // redirect based on role
-      if (data.role === "1") window.location.href = "/admin";
-      else if (data.role === "provider") window.location.href = "/provider";
-      else window.location.href = "/user";
+      // if (data.role === "1") window.location.href = "/admin";
+      // else if (data.role === "provider") window.location.href = "/provider";
+      // else window.location.href = "/user";
+        window.location.href = "/admin";
 
     } catch (err) {
       setLoading(false);
@@ -52,11 +56,12 @@ export default  function LoginPage() {
   }
 
   return (
+    <>
     <form
       onSubmit={handleLogin}
       className="w-full max-w-sm mx-auto bg-white p-6 rounded-xl shadow-md space-y-4 mt-10"
     >
-      <h2 className="text-xl font-semibold text-center mb-4">Login</h2>
+      <h2 className="text-xl font-semibold text-center mb-4">Login User</h2>
 
       {/* ERROR MESSAGE */}
       {error && (
@@ -95,6 +100,15 @@ export default  function LoginPage() {
         {loading ? "Logging in..." : "Login"}
       </button>
     </form>
+
+    <div  className="w-full max-w-sm mx-auto bg-white p-6 rounded-xl shadow-md space-y-4 mt-10">
+
+                    <p>   <Link href="/email-verify" >Email-verify</Link></p> 
+                      <p> <Link href="/user-forgot-password" > User-forgot-password</Link></p> 
+    </div>
+                       
+
+    </>
   );
 }
 

@@ -5,7 +5,7 @@
 "use client";
 
 import { useState } from "react";
-
+import Link from "next/link";
 
 export default  function LoginPage() {
 
@@ -40,9 +40,11 @@ export default  function LoginPage() {
       setLoading(false);
 
       // redirect based on role
-      if (data.role === "1") window.location.href = "/admin";
-      else if (data.role === "provider") window.location.href = "/provider";
-      else window.location.href = "/user";
+      // if (data.role === "1") window.location.href = "/admin";
+      // else if (data.role === "provider") window.location.href = "/provider";
+      // else window.location.href = "/user";
+      //  if (data.length >0) window.location.href = "/admin";
+       window.location.href = "/admin";
 
     } catch (err) {
       setLoading(false);
@@ -52,11 +54,12 @@ export default  function LoginPage() {
   }
 
   return (
+    <>
     <form
       onSubmit={handleLogin}
       className="w-full max-w-sm mx-auto bg-white p-6 rounded-xl shadow-md space-y-4 mt-10"
     >
-      <h2 className="text-xl font-semibold text-center mb-4">Login</h2>
+      <h2 className="text-xl font-semibold text-center mb-4">Login Provider</h2>
 
       {/* ERROR MESSAGE */}
       {error && (
@@ -95,6 +98,13 @@ export default  function LoginPage() {
         {loading ? "Logging in..." : "Login"}
       </button>
     </form>
+   <div  className="w-full max-w-sm mx-auto bg-white p-6 rounded-xl shadow-md space-y-4 mt-10">
+
+                    <p>      <Link href="/email-verify-provider" >Email-verify-provider</Link> </p> 
+                      <p> <Link href="/provider-forgot-password" > Provider-forgot-password</Link></p> 
+    </div>
+
+    </>
   );
 }
 

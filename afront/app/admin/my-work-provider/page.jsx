@@ -1,129 +1,41 @@
 "use client";
-
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
-export default function ProviderDashboard() {
-    const [provider, setProvider] = useState(null);
-    const [users, setUsers] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState("");
+export default function MyWorksPage() {
+  const [works, setWorks] = useState([]);
 
-    const providerId = typeof window !== "undefined" ? localStorage.getItem("providerId") : null;
-    const API_BASE = "http://localhost:8000"; // <-- Your Node.js API
+  useEffect(() => {
+    async function fetchUserWorks() {
+      const cookieRes = await fetch("/api/cookies");
+      const cookieData = await cookieRes.json();
 
-    // ============================
-    // FETCH PROVIDER DETAILS
-    // ============================
-    const fetchProvider = async () => {
-        if (!providerId) return setError("Provider ID not found");
-        try {
-            const res = await fetch(`${API_BASE}/provider/provider/${providerId}`);
-            if (!res.ok) throw new Error("Failed to fetch provider");
-            const data = await res.json();
-            setProvider(data.provider);
-        } catch (err) {
-            setError(err.message);
-        }
-    };
+      if (!cookieData.id) return;
+      const res = await fetch(`http://localhost:8000/api/works/provider/${cookieData.id}`);
+      const data = await res.json();
+      setWorks(data.works || []);
+    }
+    fetchUserWorks();
+  }, []);
 
-    // ============================
-    // FETCH USERS
-    // ============================
-    const fetchUsers = async () => {
-        try {
-            const res = await fetch(`${API_BASE}/users`);
-            if (!res.ok) throw new Error("Failed to fetch users");
-            const data = await res.json();
-            setUsers(data.users);
-        } catch (err) {
-            setError(err.message);
-        }
-    };
+  return (
+    <div className="p-6">
+      <h2 className="text-xl font-bold mb-4">My Works</h2>
 
-    // ============================
-    // LOGOUT
-    // ============================
-    const handleLogout = async () => {
-        try {
-            await fetch(`${API_BASE}/provider/logout`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ sprovid: providerId }),
-            });
-            localStorage.removeItem("providerId");
-            window.location.href = "/provider/login";
-        } catch {
-            alert("Logout failed");
-        }
-    };
-
-    // ============================
-    // INITIAL LOAD
-    // ============================
-    useEffect(() => {
-        async function load() {
-            await fetchProvider();
-            await fetchUsers();
-            setLoading(false);
-        }
-        load();
-    }, []);
-
-    if (loading) return <h2 style={{ textAlign: "center", marginTop: 40 }}>Loading...</h2>;
-    if (error) return <h2 style={{ color: "red", textAlign: "center" }}>{error}</h2>;
-
-    return (
-        <div style={styles.container}>
-            <div style={styles.header}>
-                <h1>Provider Dashboard</h1>
-                <button style={styles.logoutBtn} onClick={handleLogout}>
-                    Logout
-                </button>
-            </div>
-
-            {/* Provider Info */}
-            <div style={styles.card}>
-                <h2>Welcome, {provider?.name}</h2>
-                <p><strong>Email:</strong> {provider?.email}</p>
-                <p><strong>ID:</strong> {provider?.sprovid}</p>
-            </div>
-
-            {/* Users Table */}
-            <div style={styles.card}>
-                <h2>User Details</h2>
-                {users?.length === 0 ? (
-                    <p>No users found</p>
-                ) : (
-                    <table style={styles.table}>
-                        <thead>
-                            <tr>
-                                <th>SUID</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Verified</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {users.map(u => (
-                                <tr key={u.suid}>
-                                    <td>{u.suid}</td>
-                                    <td>{u.name}</td>
-                                    <td>{u.email}</td>
-                                    <td>{u.emailVerify ? "✔️" : "❌"}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                )}
-            </div>
+      {works.map((w) => (
+        <div key={w._id} className="bg-white shadow p-4 rounded mb-3">
+          <h3 className="font-bold">{w.title}</h3>
+          <p>Status: {w.status}</p>
+          <p>Payment: {w.paymentStatus}</p>
+          <p>
+             <span className="text-xs bg-blue-100 px-2 py-1 rounded">
+                                          {/* {w.swrid || "pending"} */}
+                                          <Link href={`/admin/work-full-detils-number/${w.swrid}`} >Full Details </Link>
+                                          
+                                      </span>
+             </p>
         </div>
-    );
+      ))}
+    </div>
+  );
 }
-
-const styles = {
-    container: { width: "90%", maxWidth: "1200px", margin: "40px auto", fontFamily: "Arial" },
-    header: { display: "flex", justifyContent: "space-between", alignItems: "center" },
-    logoutBtn: { padding: "8px 16px", background: "red", color: "#fff", border: "none", borderRadius: 6, cursor: "pointer" },
-    card: { background: "#fff", padding: 20, marginTop: 20, borderRadius: 10, boxShadow: "0 2px 6px rgba(0,0,0,0.1)" },
-    table: { width: "100%", borderCollapse: "collapse" },
-};

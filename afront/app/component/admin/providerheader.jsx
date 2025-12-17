@@ -44,11 +44,11 @@ export default function ProviderAdminHeader() {
           {/* Admin pages */}
           {/* <Link href="/admin/add-work">Add Work</Link>
           <Link href="/admin/my-work-list">My Work List</Link> */}
-          <Link href="/admin/all-work-list">All Work List</Link>
-          <Link href="/admin/open-work-list">open-work-list</Link>
-          <Link href="/admin/work-filter">work-filter</Link>
-          <Link href="/admin/accept-work-provider">accept-work-provider</Link>
-          <Link href="/admin/my-work-provider">my-work-provider</Link>
+          {/* <Link href="/admin/all-work-list">All Work List</Link> */}
+          {/* <Link href="/admin/open-work-list">open-work-list</Link> */}
+          <Link href="/admin//work-list-filter">Find Work</Link>
+          {/* <Link href="/admin/accept-work-provider">accept-work-provider</Link> */}
+          <Link href="/admin/my-work-provider">My Work</Link>
           
         </nav>
 

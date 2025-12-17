@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function MyWorksPage() {
   const [works, setWorks] = useState([]);
@@ -26,6 +27,8 @@ export default function MyWorksPage() {
           <h3 className="font-bold">{w.title}</h3>
           <p>Status: {w.status}</p>
           <p>Payment: {w.paymentStatus}</p>
+
+          <p>  <span className="text-xs bg-blue-100 px-2 py-1 rounded"><Link href={`work-full-detils-number-for-user/${w.swrid}`}> Full Details </Link> </span> </p>
         </div>
       ))}
     </div>

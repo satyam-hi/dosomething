@@ -94,6 +94,7 @@ export default function Header() {
             )}
           </div>
 
+           <Link href="/admin/">Dhashboard</Link>
           {/* Admin pages */}
           {/* <Link href="/admin/all-work-list">All Work List</Link>
           <Link href="/admin/add-work">Add Work</Link>

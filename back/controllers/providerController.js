@@ -110,9 +110,9 @@ export const getAllProvider = async (req, res) => {
  */
 export const registerProvider = async (req, res) => {
     try {
-        const { name, email, password } = req.body;
+        const { name, email, password,mobile } = req.body;
 
-        if (!name || !email || !password) {
+        if (!name || !email || !password || !mobile) {
             return res.status(400).json({
                 success: false,
                 message: "All fields are required",
@@ -129,6 +129,7 @@ export const registerProvider = async (req, res) => {
 
         const sprovid = `SPROVIDER-${Date.now()}`;
         const accesstoken = "";
+        const amount_due = "00.00";
         const sessionAccesstoken = "";
         const emailVerifyAccesstoken = `${Math.floor(
             100000 + Math.random() * 900000
@@ -139,7 +140,9 @@ export const registerProvider = async (req, res) => {
             sprovid,
             name,
             email,
+            mobile,
             password,
+            amount_due,
             accesstoken,
             sessionAccesstoken,
             emailVerifyAccesstoken,

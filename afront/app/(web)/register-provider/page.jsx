@@ -5,6 +5,7 @@ export default function RegisterPage() {
   const [form, setForm] = useState({
     name: "",
     email: "",
+    mobile:"",
     password: "",
   });
 
@@ -36,7 +37,7 @@ export default function RegisterPage() {
       }
 
       setMessage("Registration successful! Check your email for OTP.");
-      setForm({ name: "", email: "", password: "" });
+      setForm({ name: "", email: "",  mobile:"", password: "" });
 
     } catch (error) {
       setLoading(false);
@@ -79,6 +80,20 @@ export default function RegisterPage() {
           />
         </label>
 
+        
+           {/* MOBILE INPUT */}
+        <label className="block mb-4">
+          <span className="block text-sm font-medium">Mobile</span>
+          <input
+            type="number"
+            name="mobile"
+            value={form.mobile}
+            onChange={handleChange}
+            className="mt-1 w-full p-2 border rounded-lg"
+            required
+          />
+        </label>
+
         {/* PASSWORD INPUT */}
         <label className="block mb-6">
           <span className="block text-sm font-medium">Password</span>
@@ -101,7 +116,7 @@ export default function RegisterPage() {
         </button>
 
         {message && (
-          <p className="mt-4 text-center text-sm text-red-600">{message}</p>
+          <p className="mt-4 text-center text-sm text-green-600">{message}</p>
         )}
       </form>
     </div>

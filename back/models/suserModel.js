@@ -27,6 +27,7 @@ const SuserSchema = new mongoose.Schema({
     suid: String,
     name: String,
     email: String,
+    mobile: String,
     password: String,
     roll: { type: String, default: "1" },
     accesstoken: String,

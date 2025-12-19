@@ -26,9 +26,14 @@ const providerSchema = new mongoose.Schema(
     sprovid: String,
     name: String,
     email: { type: String, unique: true },
+    mobile: String,
     password: String,
     roll: { type: String, default: "2" },
-
+    payment_due: {
+      type: Boolean,
+      default: false,
+    },
+    amount_due: String,
     accesstoken: String,
     sessionAccesstoken: String,
     emailVerifyAccesstoken: String,
@@ -39,7 +44,6 @@ const providerSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-
 // Hash password before saving
 providerSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();

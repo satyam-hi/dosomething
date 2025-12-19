@@ -35,10 +35,10 @@ export const getAllUsers = async (req, res) => {
  */
 
 export const registerUser = async (req, res) => {
-    try {
-        const { name, email, password } = req.body;
+     try {
+        const { name, email,mobile, password } = req.body;
 
-        if (!name || !email || !password) {
+        if (!name || !email || !mobile || !password) {
             return res.status(400).json({
                 success: false,
                 message: "All fields are required",
@@ -65,6 +65,7 @@ export const registerUser = async (req, res) => {
             suid,
             name,
             email,
+            mobile,
             password,
             accesstoken,
             sessionAccesstoken,

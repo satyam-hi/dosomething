@@ -111,8 +111,35 @@ export default function WorkDetailsPage() {
           <h2 className="text-xl font-semibold mb-2">ACCEPTED BY</h2>
           <p>👤 Name: <b>{user?.name}</b></p>
           <p>📧 Email: <b>{user?.email}</b></p>
-          {/* <p>📧 Mobile: <b>{user?.mobile}</b></p> */}
+          <p>📧 Mobile: <b>{user?.mobile}</b></p>
           {/* <p>🆔 User ID: {user?.suid}</p> */}
+          <div className="flex gap-4 mt-2">
+            {/* Call */}
+            <a
+              href={`tel:${user?.mobile}`}
+              className="text-blue-600 hover:underline"
+            >
+              📞 Call
+            </a>
+
+            {/* WhatsApp */}
+            <a
+              href={`https://wa.me/${user?.mobile}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-green-600 hover:underline"
+            >
+              💬 WhatsApp Chat
+            </a>
+
+            {/* Email */}
+            <a
+              href={`mailto:${user?.email}`}
+              className="text-red-600 hover:underline"
+            >
+              ✉️ Email
+            </a>
+          </div>
         </section>
           {/* {work.status !== "COMPLETED"? <h2 className="text-xl font-semibold mb-2">Action</h2>:null} */}
 
